@@ -1,0 +1,9 @@
+export_seq is a sequence number — it's just the order in which records were added to the database when they were exported.
+Why is it leaking?
+When data was exported, items that were returned might have been processed/flagged later
+So returns are slightly clustered at certain export sequence numbers
+This creates an artificial relationship between the sequence number and returns
+In real production, you won't have this sequence number, or it will be meaningless
+The model learns to use this "magic number" instead of real business features
+Conclusion
+This is a very simple example of a leakage problem, so we will remove export_seq from the model.
